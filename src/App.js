@@ -1,23 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useEffect, useState } from 'react';
+import firebase from 'firebase/app';
+import 'firebase/database';
 
 function App() {
+  const [data, setData] = useState('');
+
+  useEffect(() => {
+    const database = firebase.database();
+    const dataRef = database.ref('data');
+
+    dataRef.on('value', (snapshot) => {
+      const value = snapshot.val();
+      setData(value);
+    });
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Real-time Database</h1>
+      <p>Data: {data}</p>
     </div>
   );
 }
