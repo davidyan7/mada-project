@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-import firebase from 'firebase/app';
-import 'firebase/database';
+import firebase from 'firebase/compat/app';
 
 function App() {
   const [data, setData] = useState('');
