@@ -1,17 +1,14 @@
 import { useEffect, useState } from 'react';
-import firebase from 'firebase/compat/app';
+import { ref, onValue , getDatabase} from 'firebase/database';
+import { database } from './firebase.app';
+
 
 function App() {
   const [data, setData] = useState('');
 
   useEffect(() => {
-    const database = firebase.database();
-    const dataRef = database.ref('data');
-
-    dataRef.on('value', (snapshot) => {
-      const value = snapshot.val();
-      setData(value);
-    });
+    const database = getDatabase();
+    console.log(database);
   }, []);
 
   return (
